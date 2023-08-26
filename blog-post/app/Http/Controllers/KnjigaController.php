@@ -11,9 +11,10 @@ class KnjigaController extends Controller
     {
         return Knjiga::all();
     }
-    public function show(Knjiga $book)//Dohvata pojedinacnu knjigu
+    public function show($id)
     {
-        return $book;
+        $book = Knjiga::findOrFail($id);
+        return response()->json($book);
     }
     public function store(Request $request)//Kreira novu
     {

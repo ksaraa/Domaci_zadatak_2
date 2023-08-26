@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Knjiga extends Model
 {
+    protected $fillable = ['Naslov', 'Autor'];
     protected $table = 'knjige';
     public function Zaduzenje()
 {

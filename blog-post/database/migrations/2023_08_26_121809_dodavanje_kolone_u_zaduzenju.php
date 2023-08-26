@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        /*
-            // Provera da li tabela postoji pre nego što je obrišemo
-            if (Schema::hasTable('old_products')) {
-                Schema::dropIfExists('old_products');
-            }
-        */
+        Schema::table('zaduzenje', function (Blueprint $table) {
+            $table->string('ime');
+            $table->string('prezime');
+            $table->string('naslov');
+            $table->string('autor');
+        });
     }
 
     /**
@@ -28,6 +28,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('zaduzenje', function (Blueprint $table) {
+            $table->dropColumn(['ime', 'prezime', 'naslov', 'autor']);
+        });
     }
 };

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Korisnik extends Model
 {
+    protected $fillable = ['Ime', 'Prezime'];
     protected $table = 'Korisnik';
     public function Zaduzenje()
 {
