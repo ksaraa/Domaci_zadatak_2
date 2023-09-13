@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'Pogresan username ili password',
             ], 401);
         }
 
@@ -37,7 +37,7 @@ public function logout(Request $request)
         if ($user) {
             $user->tokens()->delete(); // Obriši sve tokene korisnika
             return response()->json([
-                'message' => 'Logged out successfully',
+                'message' => 'Logged out successfully and token deleted ',
             ]);
         } else {
             return response()->json([

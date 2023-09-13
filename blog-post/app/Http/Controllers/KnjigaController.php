@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 
 class KnjigaController extends Controller
 {
-    public function index()//Dohvati sve knjige 
+    public function pregled_knjiga()//Dohvati sve knjige 
     {
         return Knjiga::all();
     }
-    public function show($id)
+    public function prikaz_knjige_po_idu($id)
     {
         $book = Knjiga::findOrFail($id);
         return response()->json($book);
     }
-    public function store(Request $request)//Kreira novu
+    public function dodavanje_knjige(Request $request)//Kreira novu
     {
         $book = Knjiga::create($request->all());
         return response()->json($book, 201);
@@ -26,10 +26,14 @@ class KnjigaController extends Controller
         $book->update($request->all());
         return response()->json($book, 200);
     }
-    public function destroy(Knjiga $book)
+    public function ukloni_knjigu($Naslov)
     {
+        $book = Knjiga::where('Naslov', $Naslov)->first();
+        if(!$book){
+            return response()->json(['message' => 'Knjiga nije pronađena.'], 404);
+        }
         $book->delete();
-        return response()->json(null, 204);
+        return response()->json(['message' => "Knjiga  je uspešno obrisana."], 200);
     }
 
 

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ZaduzenjeController extends Controller
 {
-    public function index()
+    public function pregled_zaduzenja()
     {
         return Zaduzenje::all();
     }

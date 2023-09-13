@@ -22,28 +22,27 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 Route::middleware('auth:sanctum')->group(function () {
-Route::post('Korisnik', [KorisnikController::class, 'store']);
-Route::get('Korisnik/{id}', [KorisnikController::class, 'show']);
-Route::delete('Korisnik/{id}', [KorisnikController::class, 'destroy']);
+Route::get('Korisnici',[KorisnikController::class, 'pregled_korisnika']);
+Route::post('Korisnik', [KorisnikController::class, 'kreiraj_korisnika']);
+Route::get('Korisnik/{id}', [KorisnikController::class, 'prikaz_korisnika_po_idu']);
+Route::delete('Korisnik/{id}', [KorisnikController::class, 'ukloni_korisnika']);
 
-Route::get('knjige/{id}', [KnjigaController::class, 'show']);
-Route::post('knjige', [KnjigaController::class, 'store']);
-Route::delete('knjige',[KnjigaController::class,'destroy']);
+Route::get('knjige/{id}', [KnjigaController::class, 'prikaz_knjige_po_idu']);
+Route::post('knjige', [KnjigaController::class, 'dodavanje_knjige']);
+Route::delete('knjige/{Naslov}',[KnjigaController::class,'ukloni_knjigu']);
 
 Route::post('Korisnik/{id}/zaduzi-knjigu/{knjigaId}', [KorisnikController::class, 'zaduziKnjigu']);
-Route::post('Korisnik/{id}/vrati-knjigu/{knjigaId}', [KorisnikController::class, 'vratiKnjigu']);
+Route::delete('Korisnik/{id}/vrati-knjigu/{knjigaId}', [KorisnikController::class, 'vratiKnjigu']);
 Route::post('zaduzi-knjigu', [ZaduzenjeController::class, 'zaduziKnjiguPoImenuIPrezimenu']);
 Route::delete('skini-zaduzenje', [ZaduzenjeController::class, 'skiniZaduzenjePoImenu'])->name('skini-zaduzenje');   
-Route::delete('zaduzenje',[KnjigaController::class,'destroy']);
+Route::get('zaduzenje', [ZaduzenjeController::class,'pregled_zaduzenja']);
 
+Route::post('/logout', [AuthController::class, 'logout']);
 });
-Route::resource('Korisnik', KorisnikController::class);
 
-Route::resource('knjige', KnjigaController::class);
-
-Route::resource('zaduzenje', ZaduzenjeController::class);
+Route::get('knjige', [KnjigaController::class, 'pregled_knjiga']);
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
+
 
 

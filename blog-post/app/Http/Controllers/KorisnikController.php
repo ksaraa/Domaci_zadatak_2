@@ -9,17 +9,17 @@ use Illuminate\Http\Request;
 
 class KorisnikController extends Controller
 {
-    public function index()//Dohvatanje svih korisnika 
+    public function pregled_korisnika()//Dohvatanje svih korisnika 
 {
     return Korisnik::all();
 }
 
-public function show($id)
+public function prikaz_korisnika_po_idu($id)
 {
     $user = Korisnik::findOrFail($id);
     return response()->json($user);
 }
-public function store(Request $request)
+public function kreiraj_korisnika(Request $request)
 {
     // Validacija ulaznih podataka
     $request->validate([
@@ -35,7 +35,7 @@ public function store(Request $request)
 
     return response()->json($korisnik, 201);
 }
-public function destroy($id)
+public function ukloni_korisnika($id)
 {
     $user = Korisnik::find($id);
 
@@ -45,7 +45,7 @@ public function destroy($id)
 
     $user->delete();
     
-    return response()->json(['message' => 'Korisnik uspešno obrisan.'], 204);
+    return response()->json(['message' => 'Korisnik uspešno obrisan.'], 200);
 }
 public function zaduziKnjigu($korisnikId, $knjigaId)
 {
